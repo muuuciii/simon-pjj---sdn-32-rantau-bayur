@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Validasi data laporan PJJ (disesuaikan dengan tipe LaporanPJJ di aplikasi)
+    match /laporan_pjj/{laporanId} {
+      allow read, write: if true;
+    }
+
+    // Validasi data dewan guru
+    match /guru_pjj/{guruId} {
+      allow read, write: if true;
+    }
+
+    // Profil sekolah
+    match /profil_sekolah/{docId} {
+      allow read, write: if true;
+    }
+
+    // Catch all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
